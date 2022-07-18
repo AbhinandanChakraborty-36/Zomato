@@ -1,0 +1,49 @@
+<div class="user-greeting">
+ <h3>Order Summary</h3>
+</div>
+
+<div class="rest-cont">
+  <% @menu_arr.each_with_index do |i,index|%>
+     <div class="card rest-con">
+        <% @menu = @restaurant.menus.find(i)%>
+        <% @quantity = @quantity_arr[index]%>
+         <div class="card-body">
+        <h5>Dish -:<%= @menu.name%></h5>
+        <h5>Cost -:<%= @menu.cost%></h5>
+        <h5>Quantity<%= @quantity%></h5>
+        <br/>
+        <h4> Rs. <%= @menu.cost.to_i* @quantity.to_i %></h4>
+        <hr/>
+        <% @total= @total+ @menu.cost.to_i* @quantity.to_i%>
+      </div>  
+    </div>
+  <% end %>   
+     <div class="user-greeting">
+      <h2>Total ammount -:<%= @total%></h2>
+      </div> 
+ </div>
+
+<div class="signUp mup">
+<h1 class="loghh">Enter Address</h1>
+<%= form_tag( '/ords', method: :post, remote: true,class:"container form-g") do |f| %>
+  <%= hidden_field_tag 'menu_arr', @menu_arr %>
+  <%= hidden_field_tag :restaurant_id, @restaurant.id %>
+  <%= hidden_field_tag 'quantity_arr', @quantity_arr %>
+ <div class="form-group">
+    <%= label_tag "Street"%><br/>
+    <%= text_field_tag :street,nil, placeholder:"Street", class:"form-control", required:"required"%>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag "City"%><br/>
+    <%= text_field_tag :city,nil, placeholder:"City", class:"form-control", required:"required"%>
+  </div>
+    <div class="form-group">
+    <%= label_tag "Pin-Code"%><br/>
+    <%= number_field_tag :pincode,nil, placeholder:"Pincode", class:"form-control", required:"required"%>
+  </div>
+  <br/>
+  <div class="menu-sub"><%= submit_tag "Confirm Order", class:"btn btn-danger"%></div>
+<% end %>
+
+</div>

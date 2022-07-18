@@ -1,0 +1,36 @@
+<% if current_user.isadmin?%>
+<div class="user-greeting">
+  <h1> Sure about accepting the Review ?</h1>
+  <br/>
+ </div>
+<%= form_with model:@reviews do |f|%>
+<div class="review-b container">
+<%= f.submit "Accept review", class:"btn btn-primary"%>
+<%= link_to "Delete", review_path(@review.id),class:"btn btn-danger", data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+</div>                  
+<% end %>
+
+
+ <% else %>
+<div class="signUp">
+<h1 class="loghh">Edit Your Review</h1>
+<%= form_with model: @review , class:"container form-g" do |f|%>
+<div class="form-group">
+<%= f.label :ratings, "Edit Review"%><br/>
+<%= f.text_field :ratings , class:"form-control"%>
+<br/>
+</div>
+
+<div class="form-group">
+<%= f.label :stars, "Edit Rating (Max - 5)"%><br/>
+<%= f.number_field :stars , class:"form-control",min:0,max:5%>
+<br/>
+</div>
+
+<%= f.submit "Edit Review", class:"btn btn-danger"%>
+<% end %> 
+</div>
+<% end %>

@@ -1,0 +1,9 @@
+<% @reviews.each do |rev|%>
+<div class="card rest-con">
+    <% @restaurant=Restaurant.find(rev.restaurant_id) %>
+    <h4><%= @restaurant.name%></h4>
+    <h6><%= rev.ratings%></h6>
+    <%= link_to "Update Review", edit_review_url(rev)%>
+    <br/>
+</div>
+<% end %>

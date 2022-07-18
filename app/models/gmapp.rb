@@ -1,0 +1,2 @@
+class Gmapp < ApplicationRecord
+end

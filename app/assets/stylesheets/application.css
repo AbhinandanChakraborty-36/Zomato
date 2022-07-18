@@ -1,0 +1,270 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+body{
+  padding: 0;
+  margin: 0;
+}
+
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+  margin-bottom: 50px;
+}
+
+#userId1 {
+  display: none;
+}
+
+#userId2 {
+  display: none;
+}
+
+#restId1 {
+  display: none;
+}
+
+#restId2 {
+  display: none;
+}
+
+.boxc {
+  display: none;
+  height: 10px;
+}
+
+.contain{
+  position: relative;
+  min-height: 92.5vh;
+}
+
+.b-title:hover{
+  color: red !important;
+}
+
+.nav-link:hover{
+  color: gray !important;
+}
+
+.homepage-h1{
+  font-size: 5em;
+  color:rgb(245, 71, 71)
+}
+
+.homepage-header{
+  height: 40vh;
+  width: 100%;
+  color: white;
+  text-align: center;
+  background-color: aqua;
+  background-image: url('assets/food-homepage.avif');
+  background-position:bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.whh{
+  color: white !important;
+}
+
+.hc{
+  background-color: rgb(194, 146, 146);
+}
+
+.hm-p{
+  font-size: 2.5em;
+}
+
+.home-about{
+  height: 50vh;
+  padding-top: 1em;
+  
+}
+
+
+.card-title{
+  color: rgb(211, 43, 43);
+}
+
+footer{
+  position: absolute;
+  bottom: 0;
+  background-color: black;
+  width: 100%;
+  height: 10vh;
+  text-align: center;
+  color: white;
+}
+
+
+.signUp{
+  height:92.5vh;
+  background-color: rgb(194, 146, 146);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center
+}
+
+.sign-up{
+  color: white;
+}
+
+.form-g{
+  background-color: white !important;
+  padding: 4em;
+}
+
+.loghh{
+  text-align: center;
+  color: white;
+}
+
+.loghhh{
+  color: white;
+}
+
+.user-greeting{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(223, 139, 14);
+  text-decoration: dotted;
+}
+
+.hotel-heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2em;
+  color: rgb(235, 59, 39);
+  text-decoration: underline;
+  margin-bottom: 1em;
+}
+
+.usr-contain{
+  background-color: rgb(235, 196, 196);
+}
+
+.rest-con{
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.rest-cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(235, 196, 196);
+}
+
+.user-list{
+  text-align: center;
+  color:rgb(235, 196, 196);
+}
+
+/* .user-link{
+  color: orangered;
+} */
+
+.user-panel{
+  background-color: rgb(235, 196, 196);
+}
+
+.ord-b{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.restaurant-admin-p{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.rest-name{
+text-align: center;
+color:  orangered;
+margin-top: 1em;
+}
+
+.rest-pics{
+  background-color: rgb(185, 175, 175);
+  width: max-content;
+}
+.form-pic
+{
+  margin-bottom: 1em;
+}
+
+.ratings
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-itm{
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu-o
+{
+ margin-right: 5em;
+}
+
+.menu-sub{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-cover{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(235, 196, 196);
+  height: 92.4vh;
+}
+
+.admin-card{
+  width: 80%;
+}
+
+.review-b{
+  display: flex;
+  justify-content: space-evenly;
+align-items: center;
+}
+
+.alert{
+  margin-bottom: 0 !important;
+}
+
+.mup{
+  height: 75vh;
+}

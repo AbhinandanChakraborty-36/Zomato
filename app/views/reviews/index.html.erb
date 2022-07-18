@@ -1,0 +1,20 @@
+<div class="hotel-heading">
+  <h4> Your Reviews</h4>
+ </div>
+
+<div class="rest-cont">
+<% @user.reviews.each do |comment| %>
+<div class="card rest-con">
+ <% @restaurant= Restaurant.find(comment.restaurant_id)%>
+    <h3 class="card-header"><%= @restaurant.name %></h3>
+    <div class="card-body">
+    <h5 class="card-title">Your Review-: <%= comment.ratings %></h5>
+    <%= link_to "Edit", edit_review_path(comment.id), class:"btn btn-secondary"%>
+    <%= link_to "Delete",review_path(comment),class:"btn btn-danger", data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }%>
+       </div>           
+    </div>
+<% end %>
+</div>

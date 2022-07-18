@@ -1,0 +1,18 @@
+<div class="signUp">
+<h1 class="sign-up">Book Table</h1>
+<%= form_with model: @books , class:"container form-g" do |f|%>
+    <div class="form-group">
+    <h5><%= f.label :heads%></h5>
+    <%= f.number_field :heads,class:"form-control-md", required:"true"%>
+    </div><br/>
+    <div class="form-group">
+    <h5>Booking Date </h5>
+    <%= f.date_field :booked_on, required:"true"%>
+    </div><br/>
+    <div class="form-group">
+    <h5>Booking Time </h5>
+    <%= f.time_field :booked_at,required:"true"%>
+    </div><br/>
+    <%= f.submit "Save Booking", class:"btn btn-danger"%>
+<% end %>
+</div>

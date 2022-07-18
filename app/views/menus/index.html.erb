@@ -1,0 +1,42 @@
+<h3 class="user-greeting"> Menu <h3> 
+
+
+<%= form_tag( '/ords', method: :get , remote: true) do |f| %>
+  <% @restaurant.menus.each do |menu|%>
+      <div class="card rest-con">
+        <div class="menu-itm">
+           <h3 class="card-title"><%= menu.name%></h3>
+          <div>
+            <%= check_box_tag 'accept[]', menu.id,checked= false, class: "checkbox menu-o"%>
+            <div class='boxc card-title'>Quantity -: <%= number_field_tag 'quantity[]'%></div><br/>
+          </div> 
+       </div>
+        <h4 class="card-title">Price-: <%= menu.cost%></h4> 
+      </div>     
+  <% end %>   
+   <div class="menu-sub"><%= submit_tag "Go to cart", class:"btn btn-danger",disabled:"disabled",id:"menu-sub-btn"%></div>
+  <%= hidden_field_tag :restaurant_id, @restaurant.id %>
+<% end %>
+
+<script>
+var checkbox = document.getElementsByClassName('checkbox');
+var sendbtn = document.getElementById('menu-sub-btn');
+var checkboxclick = function() {  
+  console.log(this.parentNode.getElementsByClassName('boxc'))
+  var box = this.parentNode.getElementsByClassName('boxc')[0];
+  box.style['display'] = this.checked ? 'block' : 'none';
+  var input_element= box.querySelectorAll("input")[0]
+  input_element.setAttribute("required","true")
+};
+for (var i = 0; i < checkbox.length; i++) {
+    checkbox[i].addEventListener('click', checkboxclick, false);
+    checkbox[i].onchange = function() {
+    if(this.checked){
+      sendbtn.disabled = false;
+    } else {
+      sendbtn.disabled = true;
+    }
+  }
+}
+
+</script>

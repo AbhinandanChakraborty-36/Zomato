@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <%= link_to "Potato",root_path, class:"navbar-brand b-title"%> 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <% if !logged_in?%>
+        <li class="nav-item">
+          <%= link_to "Sign Up", signup_path, class:"nav-link whh" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Sign In", login_path, class:"nav-link whh" %>
+        </li>
+      <% else %>
+         <li class="nav-item">
+          <%= link_to "User Profile",'/users/'+ current_user.id.to_s, class:"nav-link whh" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Hotels", restaurants_path, class:"nav-link whh" %>
+        </li>
+        <% end %>
+      </ul>
+
+    <%= form_tag '/search',method: :get , remote: true, class:"d-flex" do |f| %>
+      <%= text_field_tag  :search,"", class:"form-control me-2", required:"required", placeholder:"Search Restaurants,Locations"%>
+      <%= submit_tag "Search", class:"btn btn-outline-danger" %>
+    <% end %>
+
+    </div>
+  </div>
+</nav>

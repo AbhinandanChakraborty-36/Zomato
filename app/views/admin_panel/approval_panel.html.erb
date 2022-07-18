@@ -1,0 +1,22 @@
+<div class="user-greeting">
+<h1>Reviews for Approval </h1>
+</div>
+
+<div class="rest-cont">
+<% @reviews.each do |review|%>
+<div class="card rest-con">
+<% @user= User.find(review.user_id)%>
+<% @restaurant= Restaurant.find(review.restaurant_id)%>
+<div class="card-body">
+<h5 class="card-title">Username-: <%= @user.username%></h5>
+<h5 class="card-title">Restaurants-: <%= @restaurant.name%></h5>
+<h5 class="card-title">Ratings-: <%= review.ratings%></h5>
+<%= link_to "Accept Review", edit_review_url(review),class:"btn btn-primary",method: :post %>
+<%= link_to "Delete", review_path(review),class:"btn btn-danger", data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+</div>                  
+</div>
+<% end %>
+</div>

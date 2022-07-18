@@ -1,0 +1,2 @@
+class OrdItemsController < ApplicationController
+end

@@ -1,0 +1,19 @@
+<div class="user-greeting">
+<h2>Restaurants Appointments </h2>
+</div>
+
+
+<div class="rest-cont">
+<% @book.reverse_each do |b|%>
+ <% @restaurant= Restaurant.find(b.restaurant_id)%>
+ <div class="card rest-con">
+  <h3 class="card-header"><%= @restaurant.name %></h3>
+  <div class="card-body">
+   <h5 class="card-title">Heads -: <%= b.head %></h5>
+   <h5 class="card-title">Booking Date -:<%= b.booked_on%></h5>
+   <h5 class="card-title">Booking Time -:<%= b.booked_at%></h5>
+ </div>
+ </div>
+<hr/>
+<% end %>
+</div>

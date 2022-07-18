@@ -1,0 +1,21 @@
+
+<%= form_tag( '/orders', method: :post, remote: true) do |f| %>
+  <% @menu_arr.each do |i|%>
+        <% @menu = @restaurant.menus.find(i)%>
+        <% @quantity = @quantity_arr[i.to_i-1]%>
+
+        <h5>Dish -:<%= @menu.name%></h5>
+        <h5>Cost -:<%= @menu.cost%></h5>
+        <h5>Quantity<%= @quantity%></h5>
+        <br/>
+        <h4> Rs. <%= @menu.cost.to_i* @quantity.to_i %></h4>
+        <hr/>
+        <% @total= @total+ @menu.cost.to_i* @quantity.to_i%>
+  <% end %>    
+  <h2>Total ammount -:<%= @total%></h2>
+  <%= hidden_field_tag 'menu_arr', @menu_arr %>
+  <%= hidden_field_tag :restaurant_id, @restaurant.id %>
+  <%= hidden_field_tag 'quantity_arr', @quantity_arr %>
+  <%= submit_tag "Confirm Order"%>
+<% end %>
+

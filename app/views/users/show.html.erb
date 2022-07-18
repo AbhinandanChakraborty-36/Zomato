@@ -1,0 +1,56 @@
+<% if flash.any? %>
+<% flash.each do |notice, msg|%>
+<div class="alert alert-info">
+<%= msg%>
+</div>
+<% end %>
+<% end %>
+
+
+
+
+<div class="usr-contain">
+ <div class="user-greeting">
+  <h1>Welcome <%= @user.username %> !</h1>
+ </div>
+
+  <div class="hotel-heading">
+  <h4> User Panel</h4>
+ </div>
+
+
+ <div class="user-panel">
+ <h5 class="user-list"><%= link_to "Show Appointments", appointments_path, class:"btn btn-secondary" %></h5>
+ <% if !current_user.isadmin?%>
+  <h5 class="user-list"><%= link_to "See reviews", user_reviews_url(@user),class:"btn btn-secondary" %></h5>
+ <% end %>
+ <h5 class="user-list"><%= link_to "Show current order", gmapps_path,class:"btn btn-secondary" %></h5>
+
+ <% if @user.isadmin%>          
+    <h5 class="user-list"><%= link_to "Admin Panel", admin_path,class:"btn btn-secondary" %></h5>
+    <h5 class="user-list"><%= link_to "Admin Review Panel", admin_approval_path,class:"btn btn-secondary" %></h5>
+  <% end %>
+
+ <% if current_user == @user%>
+    <h5 class="user-list"><%=  link_to "Update User Profile", edit_user_path,class:"btn btn-secondary"%> </h5>
+    <h5 class="user-list"> <%= button_to "Logout", logout_path, class:"btn btn-danger"%></h5>
+   <% end %>   
+</div>
+
+ <div class="hotel-heading">
+  <h4> All hotels registered on Potato </h4>
+ </div>
+
+   <div class="rest-cont">
+<% @restaurants.each do|r|%>
+<div class="card rest-con">
+    <h3 class="card-header"><%= r.name%></h3>
+    <div class="card-body">
+     <h5 class="card-title"><%= r.category%></h5>
+    <%= link_to "More Details", r, class:"btn btn-secondary"%>
+    </div>
+</div>
+<% end %>
+</div>
+</div>
+

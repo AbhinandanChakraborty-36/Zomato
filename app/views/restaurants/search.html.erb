@@ -1,0 +1,26 @@
+<div class="user-greeting">
+  <h1> Restaurants</h1>
+ </div>
+
+<div class="rest-cont">
+<% @restaurants1.each do |r|%>
+<div class="card rest-con">
+<h3 class="card-header"><%= r.name%></h3>
+<div class="card-body">
+     <h5 class="card-title"><%= r.category%></h5>
+    <%= link_to "More Details", r, class:"btn btn-secondary"%>
+</div>
+</div>
+<br/>
+<% end %>
+<% @restaurants2.each do |r|%>
+<div class="card rest-con">
+<h3 class="card-header"><%= r.name%></h3>
+<div class="card-body">
+     <h5 class="card-title"><%= r.category%></h5>
+    <%= link_to "More Details", r, class:"btn btn-secondary"%>
+</div>
+</div>
+<br/>
+<% end %>
+</div>

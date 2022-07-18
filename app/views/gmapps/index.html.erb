@@ -1,0 +1,61 @@
+
+<div class="usr-contain">
+
+<div class="user-greeting">
+<h2><%= @restaurant.name%></h2>
+</div>
+
+<div class="hotel-heading">
+<h3> Order Summary</h3>
+</div>
+
+<% @ordered_items.each do |o|%>
+<div class="card rest-con">
+<% @menu=@restaurant.menus.find(o.menu)%>
+  <div class="card-body">
+<h3 class="card-title">Order name -: <%= @menu.name%><h3>
+<h5 class="card-title">Quantity-: <%= o.quantity%></h5>
+<h5 class="card-title"> Cost -: <%= @menu.cost*o.quantity%></h5>
+<% @total_cost=@total_cost + @menu.cost*o.quantity%>
+</div>
+</div>
+<% end %>
+
+<div class="hotel-heading">
+<h3> Total Cost -: <%= @total_cost%>
+</div>
+
+<div class="hotel-heading">
+<h3> Delivery Address -: <%= @order.Address%>
+</div>
+
+
+    <!--The div element for the map -->
+    <div class="user-greeting">
+    <h4 >Restaurant Location</h4>
+    </div>
+    <div id="map" class="container">
+    <p class="user-greeting"> Refresh if map is  not visible </p>
+    </div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+
+  <p id="userId1"><%= current_user.latitude%></p>
+  <p id="userId2"><%= current_user.longitude%></p>
+  <p id="restId2"><%=@restaurant.longitude%></p>
+  <p id="restId1"><%=@restaurant.latitude%></p>
+
+<div class="ord-b">
+<h6><%= link_to "Go back to hotels", restaurants_path, class:"btn btn-danger"%><h6>
+</div>
+</div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeSqxdq5YGu3Arykz5QE4qvAUJN5i0h1c&callback=initMap&v=weekly"
+      defer 
+    >
+    </script>

@@ -1,0 +1,15 @@
+<div class="admin-cover">
+<div class="card admin-card">
+    <div class="card-header">
+        <h1 class="card-title">Admin Panel</h1>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Number of users registered <%= @users.count %> </h4>
+        <h4 class="card-title">Number of hotels registered <%= @restaurants.count %> </h4> 
+        <%= link_to "Show Hotels",  restaurants_path, class:"btn btn-secondary"%>
+        <%= link_to "Register Hotels",   new_restaurant_path, class:"btn btn-danger"%>
+    </div>
+</div>
+</div>
+
+
