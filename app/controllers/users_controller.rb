@@ -65,6 +65,11 @@ class UsersController < ApplicationController
     end
     
       def appointments
+        @user=User.find(params[:id])
+        if session[:user_id] != @user.id
+          flash[:notice]="Action not authorized"
+          redirect_to login_path
+        end
         @book= Book.where(user_id:current_user.id)
       end
     private
