@@ -1,9 +1,11 @@
 class ReviewsController < ApplicationController
 
     def index
-        if logged_in?
+        @user= User.find(params[:user_id])        
+        if session[:user_id]== @user.id 
         @user=User.find(current_user.id)
         else
+            flash[:notice]= "Not Authorized"
             redirect_to login_path
         end   
     end
@@ -42,7 +44,13 @@ class ReviewsController < ApplicationController
         @rest= Restaurant.find(@review.user_id)
         redirect_to @rest
       end
-      
+
+    
+    def accept  
+        @review= Review.find(params[:review_id])
+        @review.update(isApproved: true)
+        redirect_to admin_approval_path
+    end    
     private
     def review_params
         params.require(:review).permit(:ratings, :stars)

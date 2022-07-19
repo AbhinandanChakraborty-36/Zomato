@@ -1,0 +1,6 @@
+ <h5 class="card-title"> Apply Filter <%= @t%></h5>
+
+ <%= form_tag '/search',method: :get , remote: true, class:"d-flex" do |f| %>
+    <%= select_tag "filter", raw("<<option>Restaurant</option><option>Location</option><option>Restaurant Type</option>") %>
+    <%= submit_tag "Apply Filter", class:"btn btn-danger"%>
+ <%end%>

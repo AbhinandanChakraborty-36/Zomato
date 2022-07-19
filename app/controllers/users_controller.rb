@@ -20,6 +20,7 @@ class UsersController < ApplicationController
         @user=User.new(user_params)
         if @user.valid?
             @user.save
+            flash[:notice]="User Registered Successfully"
             redirect_to @user
         else
           flash[:notice]="Email already exists"

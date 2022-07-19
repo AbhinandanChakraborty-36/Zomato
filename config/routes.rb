@@ -45,4 +45,5 @@ Rails.application.routes.draw do
   get '/user/:id/bookings', to: 'users#appointments', as:'appointments'
   get '/orders/gmpass', to:'orders#gmapss'
   get '/search',to: 'restaurants#search'
+  post '/reviews/accept', to: 'reviews#accept'
 end

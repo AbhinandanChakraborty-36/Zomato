@@ -21,9 +21,7 @@
 
  <div class="user-panel">
  <h5 class="user-list"><%= link_to "Show Appointments", appointments_path, class:"btn btn-secondary" %></h5>
- <% if !current_user.isadmin?%>
   <h5 class="user-list"><%= link_to "See reviews", user_reviews_url(@user),class:"btn btn-secondary" %></h5>
- <% end %>
  <h5 class="user-list"><%= link_to "Show current order", gmapps_path,class:"btn btn-secondary" %></h5>
 
  <% if @user.isadmin%>          

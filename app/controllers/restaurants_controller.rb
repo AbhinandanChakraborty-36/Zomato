@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
 
+  @@search_var
     def index
       if logged_in?
         @restaurant=Restaurant.all
@@ -72,8 +73,21 @@ class RestaurantsController < ApplicationController
           redirect_to login_path
         end
         
+        if params[:filter].nil? 
+         @@search_var= params[:search]
          @restaurants1= Restaurant.where("name LIKE ?", "%"+params[:search]+"%")
          @restaurants2= Restaurant.near(params[:search],50).order("distance")
+        else  
+           @s= params[:filter]
+           if params[:filter] == 'Restaurant'
+            @restaurants= Restaurant.where("name LIKE ?", "%"+@@search_var+"%")
+           elsif params[:filter] == 'Location'
+            @restaurants= Restaurant.near(@@search_var,50).order("distance")
+           else 
+            @restaurants= Restaurant.where("resturant_type LIKE ?", "%"+@@search_var+"%")
+           end
+         end 
+
       end
     
     private

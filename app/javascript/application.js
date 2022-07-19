@@ -4,14 +4,3 @@ import "controllers"
 import "custom/main"
 
 
-// Checkboxes 
-
-// var checkboxes= document.getElementsByClassName("checkboxes")
-
-
-
-// for(let i=0; i<checkboxes.length;i++)
-// {
-// console.log("Hi")
-// }
-
