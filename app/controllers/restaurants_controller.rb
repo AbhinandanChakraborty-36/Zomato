@@ -67,29 +67,32 @@ class RestaurantsController < ApplicationController
       end
 
       def search
-           
         if !logged_in?
           flash[:notice]="Please Signup/Login"
           redirect_to login_path
         end
-        
-        if params[:filter].nil? 
-         @@search_var= params[:search]
+         
+        @searched_item=params[:search]
          @restaurants1= Restaurant.where("name LIKE ?", "%"+params[:search]+"%")
          @restaurants2= Restaurant.near(params[:search],50).order("distance")
-        else  
-           @s= params[:filter]
-           if params[:filter] == 'Restaurant'
-            @restaurants= Restaurant.where("name LIKE ?", "%"+@@search_var+"%")
-           elsif params[:filter] == 'Location'
-            @restaurants= Restaurant.near(@@search_var,50).order("distance")
-           else 
-            @restaurants= Restaurant.where("resturant_type LIKE ?", "%"+@@search_var+"%")
-           end
-         end 
+         @restaurants3= Restaurant.where("resturant_type LIKE ?", "%"+params[:search]+"%")
 
+         @restaurants= @restaurants1|@restaurants2|@restaurants3
       end
     
+      def search_filter
+          @search=params[:search]
+          @filter= params[:filter]
+          if params[:filter] == 'Restaurant'
+          @restaurants= Restaurant.where("name LIKE ?", "%"+@search+"%")
+          elsif params[:filter] == 'Location'
+          @restaurants= Restaurant.near(@search,50).order("distance")
+          else 
+          @restaurants= Restaurant.where("resturant_type LIKE ?", "%"+@search+"%")
+          end
+          
+          render :search_filter , locals:{search: params[:search], filter: params[:filter]}
+      end
     private
 
     def params_create

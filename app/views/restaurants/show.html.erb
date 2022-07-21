@@ -48,20 +48,29 @@
 <% end %>
 
 <h3 class="rest-name"> Add review about the hotel-: </h3>
-<%= form_with model: [ @restaurant, @restaurant.reviews.build ] do |form| %>
-  <div class="form-group ratings">
+<%= form_tag '/reviews', method: :post, remote: :true , class:"ratings form" do |form| %>
+  <div class="">
   <div>
-    <strong><%= form.label :ratings, "Add Review" %></strong>
-    <%= form.text_field :ratings, class:"form-control-md", required:"required" %>
+    <%= label_tag "Review"%>
+    <%= text_field_tag :ratings,nil, class:"form-control-md", required:"required" %>
   </div>
-<br/>
-  <div>
-    <strong><%= form.label :stars, "Add Ratings (Max 5)" %></strong>
-    <%= form.number_field :stars, class:"form-control-md", required:"required", max: 5,min: 0 %>
-  </div>
+   <br/>
+     <dd >
+        <%= radio_button_tag "stars",1, id:"star1"%>
+        <%= label_tag "star1", "1 star", title:"text"%>
+        <%= radio_button_tag "stars",2, id:"star2"%>
+        <%= label_tag "star2", "2 stars", title:"text"%>
+        <%= radio_button_tag "stars",3, id:"star3"%>
+        <%= label_tag "star3", "3 stars", title:"text"%>
+        <%= radio_button_tag "stars",4, id:"star4"%>
+        <%= label_tag "star4", "4 stars", title:"text"%>
+        <%= radio_button_tag "stars",5, id:"star5"%>
+        <%= label_tag "star5", "5 stars", title:"text"%>
+      </dd>                     
   <br/>
-    <%= form.submit "Submit", class:"btn btn-primary"  %>
-  
+ <%= hidden_field_tag :restaurant_id, @restaurant.id%>
+
+ <%= submit_tag "Submit Review", class:"btn btn-danger"%>
 <% end %>
   </div>
 

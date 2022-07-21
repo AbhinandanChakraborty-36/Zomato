@@ -37,8 +37,6 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#omniauth'
   get '/admin', to: 'admin_panel#index'
   get '/admin/approval', to: 'admin_panel#approval_panel',as:'admin_approval'
-  # post '/approved', to: 'reviews#approved', as:"approved"
-  # post '/declined', to: 'reviews#declined', as:"declined"
   post '/reviews/:id/edit', to: 'reviews#update'
   get '/user/:id/reviews/check', to: 'reviews#check'
   post '/restaurants/:id/book_offline/new', to: 'book_offline#create'
@@ -46,4 +44,8 @@ Rails.application.routes.draw do
   get '/orders/gmpass', to:'orders#gmapss'
   get '/search',to: 'restaurants#search'
   post '/reviews/accept', to: 'reviews#accept'
+  get '/filter', to: 'restaurants#search_filter'
+  
 end
+
+# render :search , locals:{search: params[:search]}

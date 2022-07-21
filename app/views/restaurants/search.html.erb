@@ -2,50 +2,25 @@
   <h1> Restaurants</h1>
  </div>
 
-<%= render 'layouts/filter' %>
+<%=form_tag '/filter', method: :get, remote: true do |f|%>
+  <%= hidden_field_tag "search", params[:search]%>
+  <%= hidden_field_tag "filter", "Restaurant"%>
+  <%= submit_tag "Apply Filter", class:"btn btn-danger"%>
+<% end %>  
 <br/>
-<h2 class="card-title"> Search Results for <% if !@s.nil?%>
-<%= @s%> filter 
-<% end %></h2>
 
 <br/>
 <div class="rest-cont">
-<%if !@restaurants1.nil?%>
-<% @restaurants1.each do |r|%>
-<div class="card rest-con">
-<h3 class="card-header"><%= r.name%></h3>
-<div class="card-body">
-     <h5 class="card-title"><%= r.category%></h5>
-    <%= link_to "More Details", r, class:"btn btn-secondary"%>
-</div>
-</div>
-<br/>
-<% end %>
-<%end%>
-
-<%if !@restaurants2.nil?%>
-<% @restaurants2.each do |r|%>
-<div class="card rest-con">
-<h3 class="card-header"><%= r.name%></h3>
-<div class="card-body">
-     <h5 class="card-title"><%= r.category%></h5>
-    <%= link_to "More Details", r, class:"btn btn-secondary"%>
-</div>
-</div>
-<br/>
-<% end %>
-<% end %>
-
 <%if !@restaurants.nil?%>
 <% @restaurants.each do |r|%>
 <div class="card rest-con">
 <h3 class="card-header"><%= r.name%></h3>
 <div class="card-body">
      <h5 class="card-title"><%= r.category%></h5>
-    <%= link_to "More Details", r, class:"btn btn-secondary"%>
+     <%= link_to "More Details", r, class:"btn btn-secondary"%>
 </div>
 </div>
 <br/>
 <% end %>
-<% end %>
+<%end%>
 </div>

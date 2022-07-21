@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
 
     def create
         @restaurant=Restaurant.find(params[:restaurant_id])
-        @res=@restaurant.reviews.new(review_params)
+        @res=@restaurant.reviews.new(ratings: params[:ratings], stars: params[:stars])
         @res.user_id=current_user.id
         @res.save
         flash[:notice]="Review sent for approval from admin"
@@ -41,8 +41,7 @@ class ReviewsController < ApplicationController
     def destroy
         @review = Review.find(params[:id])
         @review.destroy
-        @rest= Restaurant.find(@review.user_id)
-        redirect_to @rest
+        redirect_to restaurants_path
       end
 
     
@@ -52,7 +51,7 @@ class ReviewsController < ApplicationController
         redirect_to admin_approval_path
     end    
     private
-    def review_params
-        params.require(:review).permit(:ratings, :stars)
-    end
+    # def review_params
+    #     params.require(:review).permit(:ratings, :stars)
+    # end
 end
