@@ -5,6 +5,7 @@ class BookOfflineController < ApplicationController
   def new
     if logged_in?
      @book= Book.new
+    end
   end
 
   def create

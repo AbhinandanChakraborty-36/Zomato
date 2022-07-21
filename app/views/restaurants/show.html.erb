@@ -1,9 +1,9 @@
 <% if flash.any? %>
-<% flash.each do |notice, msg|%>
-<div class="alert alert-info">
-<%= msg%>
-</div>
-<% end %>
+  <% flash.each do |notice, msg|%>
+    <div class="alert alert-info">
+    <%= msg%>
+  </div>
+  <% end %>
 <% end %>
 
 
@@ -50,12 +50,8 @@
 <h3 class="rest-name"> Add review about the hotel-: </h3>
 <%= form_tag '/reviews', method: :post, remote: :true , class:"ratings form" do |form| %>
   <div class="">
-  <div>
-    <%= label_tag "Review"%>
-    <%= text_field_tag :ratings,nil, class:"form-control-md", required:"required" %>
-  </div>
-   <br/>
-     <dd >
+      <dd >
+     <%= label_tag "Add Rating-:  "%>
         <%= radio_button_tag "stars",1, id:"star1"%>
         <%= label_tag "star1", "1 star", title:"text"%>
         <%= radio_button_tag "stars",2, id:"star2"%>
@@ -68,9 +64,14 @@
         <%= label_tag "star5", "5 stars", title:"text"%>
       </dd>                     
   <br/>
+  <div>
+    <%= label_tag "Review"%>
+    <%= text_field_tag :ratings,nil, class:"form-control-md"%>
+  </div>
+   <br/>
  <%= hidden_field_tag :restaurant_id, @restaurant.id%>
 
- <%= submit_tag "Submit Review", class:"btn btn-danger"%>
+ <%= submit_tag "Submit", class:"btn btn-danger"%>
 <% end %>
   </div>
 

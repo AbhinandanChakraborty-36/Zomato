@@ -20,8 +20,8 @@ class UsersController < ApplicationController
         @user=User.new(user_params)
         if @user.valid?
             @user.save
-            flash[:notice]="User Registered Successfully"
-            redirect_to @user
+            flash[:notice]="User Registered Successfully. Please Login to continue."
+            redirect_to login_path
         else
           flash[:notice]="Email already exists"
             redirect_to signup_path
