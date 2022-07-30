@@ -308,3 +308,12 @@ align-items: center;
 .rate > label:hover ~ input:checked ~ label {
   color: #C59B08;
 }
+
+.editUser{
+  color: red;
+  text-align: center;
+}
+
+.cover{
+  background-color: pink;
+}

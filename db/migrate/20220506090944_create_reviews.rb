@@ -4,7 +4,7 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       t.references :user, null: false, foreign_key: true
       t.references :restaurant, null: false, foreign_key: true
       t.string :ratings
-      t.boolean :isApproved, default:false
+      t.boolean :isApproved, default: false
 
       t.timestamps
     end

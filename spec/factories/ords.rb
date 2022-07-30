@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :ord do
-    address {"Test Address"}
+    address { 'Test Address' }
     user
     restaurant
   end

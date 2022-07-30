@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :menu do
-    name {"Test"}
+    name { 'Test' }
   end
 end

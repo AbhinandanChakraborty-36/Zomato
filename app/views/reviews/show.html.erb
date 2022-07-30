@@ -1,5 +1,5 @@
 <% @user.reviews.each do |comment| %>
- <% @restaurant= Restaurant.find(comment.restaurant_id)%>
+ <% @restaurant= get_restaurant(comment.restaurant_id)%>
     <h4><%= @restaurant.name %></h4>
     <h5><%= comment.ratings %></h5>
     <%= link_to "Edit Review"%>

@@ -1,10 +1,8 @@
  <h5 class="card-title"> Apply Filter</h5>
 
  <%= form_tag '/filter',method: :get , remote: true, class:"" do |f| %>
-   
-   
-   <%= text_field_tag :search,nil, placeholder:"Filter using Restaurant Name, Location or Type", class:"form-control", required:"required"%>
-   <br/>
+    <%= text_field_tag :search,nil, placeholder:"Filter using Restaurant Name, Location or Type", class:"form-control", required:"required"%>
+    <br/>
     <%= select_tag "filter", raw("<<option>Restaurant</option><option>Location</option><option>Restaurant Type</option>") %>
     <br/>
     <br/>

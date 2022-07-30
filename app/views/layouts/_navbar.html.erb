@@ -6,20 +6,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <% if !logged_in?%>
-        <li class="nav-item">
-          <%= link_to "Sign Up", signup_path, class:"nav-link whh" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Sign In", login_path, class:"nav-link whh" %>
-        </li>
-      <% else %>
-         <li class="nav-item">
-          <%= link_to "User Profile",'/users/'+ current_user.id.to_s, class:"nav-link whh" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Hotels", restaurants_path, class:"nav-link whh" %>
-        </li>
+        <% if !logged_in?%>
+          <li class="nav-item">
+            <%= link_to "Sign Up", signup_path, class:"nav-link whh" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign In", login_path, class:"nav-link whh" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "User Profile",'/users/'+ current_user.id.to_s, class:"nav-link whh" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Hotels", restaurants_path, class:"nav-link whh" %>
+          </li>
         <% end %>
       </ul>
 

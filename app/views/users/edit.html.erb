@@ -1,8 +1,6 @@
-<div class="signUp">
-<br/>
-<h1 class="sign-up">Update User Details</h1>
+<div class="cover">
 <%= form_with model: @user,class:"container form-g"  do |form| %>
-
+<h1 class="editUser">Update User Details</h1>
   <div class="form-group">
     <%= form.label :email %><br>
     <%= form.text_field :email, class:"form-control" %>
@@ -36,5 +34,4 @@
 
     <%= form.submit "Update User",class:"btn btn-danger"%>
 <% end %>
-
 </div>

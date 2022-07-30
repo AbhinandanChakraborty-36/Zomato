@@ -22,21 +22,22 @@
 <% end %>
 
 <div class="hotel-heading">
-<h3> Total Cost -: <%= @total_cost%>
+  <h3> Total Cost -: <%= @total_cost%>
 </div>
 
 <div class="hotel-heading">
-<h3> Delivery Address -: <%= @order.Address%>
+  <h3> Delivery Address -: <%= @order.Address%>
 </div>
 
 
     <!--The div element for the map -->
-    <div class="user-greeting">
-    <h4 >Restaurant Location</h4>
-    </div>
-    <div id="map" class="container">
-    <p class="user-greeting"> Refresh if map is  not visible </p>
-    </div>
+<div class="user-greeting">
+  <h4 >Restaurant Location</h4>
+</div>
+
+<div id="map" class="container">
+  <p class="user-greeting"> Refresh if map is  not visible </p>
+</div>
 
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
