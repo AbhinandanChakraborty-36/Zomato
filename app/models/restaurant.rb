@@ -7,5 +7,8 @@ class Restaurant < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
+  scope :search_name, ->(search) { where('name LIKE ?', '%' + search + '%') }
+  scope :search_type, ->(search) { where('resturant_type LIKE ?', '%' + search + '%') }
+
   def address; end
 end

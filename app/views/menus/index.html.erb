@@ -1,6 +1,4 @@
 <h3 class="user-greeting"> Menu <h3> 
-
-
 <%= form_tag( '/ords', method: :get , remote: true) do |f| %>
   <% @restaurant.menus.each do |menu|%>
       <div class="card rest-con">

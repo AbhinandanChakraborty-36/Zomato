@@ -1,11 +1,4 @@
-<% if flash.any? %>
-    <% flash.each do |error, msg|%>
-        <div class="alert alert-info">
-            <%= msg%>
-        </div>
-    <% end %>
-<% end %>
-
+<%= render 'layouts/flash'%>
 <div class="signUp">
 <h1 class="loghh">Sign In</h1>
     <%= form_tag sessions_path, class:"container form-g" do%>

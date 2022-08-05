@@ -1,12 +1,4 @@
-<% if flash.any? %>
-  <% flash.each do |notice, msg|%>
-    <div class="alert alert-info">
-      <%= msg%>
-    </div>
-  <% end %>
-<% end %>
-
-
+<%= render 'layouts/flash'%>
 
 <div class="card rest-con">
  <h2 class="rest-name"><%= @restaurant.name%><h2>

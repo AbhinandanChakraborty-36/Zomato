@@ -5,10 +5,8 @@ class GmappsController < ApplicationController
     if !@order.nil?
       @restaurant = Restaurant.find(@order.restaurant_id)
       @ordered_items = @order.ord_items.all
-
     else
-      flash[:notice] = 'No orders currently'
-      redirect_to login_path
+      redirect_to login_path, flash: {success: 'No orders currently'}
     end
     @total_cost = 0
   end

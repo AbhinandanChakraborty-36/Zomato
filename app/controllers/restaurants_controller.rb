@@ -1,8 +1,7 @@
 class RestaurantsController < ApplicationController
-  @@search_var
   def index
     if logged_in?
-      @restaurant = Restaurant.all
+      @restaurants = Restaurant.all
     else
       redirect_to login_path
     end
@@ -20,8 +19,7 @@ class RestaurantsController < ApplicationController
     if logged_in? && current_user.isadmin?
       @restaurant = Restaurant.new
     else
-      flash[:new] = 'Only admin can register new restaurants'
-      redirect_to login_path
+      redirect_to login_path, flash: {success: 'Only admin can register new restaurants'}
     end
   end
 
@@ -29,7 +27,6 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.create(params_create)
     if @restaurant.save
       redirect_to @restaurant
-
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,13 +36,12 @@ class RestaurantsController < ApplicationController
     if logged_in? && current_user.isadmin?
       @restaurant = Restaurant.find(params[:id])
     else
-      flash[:new] = 'Only admin can register new restaurants'
-      redirect_to login_path
+      redirect_to login_path, flash: {success: 'Only admin can update restaurants'}
     end
   end
 
   def update
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Restaurant.find(get_restaurant[:id])
     if params[:restaurant][:pictures].present?
       params[:restaurant][:pictures].each do |image|
         @restaurant.pictures.attach(image)
@@ -61,45 +57,45 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
-
     redirect_to restaurants_path, status: :see_other
   end
 
   def search
     unless logged_in?
-      flash[:notice] = 'Please Signup/Login'
-      redirect_to login_path
+      redirect_to login_path, flash: {success: 'Please Signup/Login'}
     end
-
-    @searched_item = params[:search]
-    @restaurants1 = Restaurant.where('name LIKE ?', '%' + params[:search] + '%')
-    @restaurants2 = Restaurant.near(params[:search], 50).order('distance')
-    @restaurants3 = Restaurant.where('resturant_type LIKE ?', '%' + params[:search] + '%')
-
+    @searched_item = search_params[:search]
+    @restaurants1 = Restaurant.search_name(@searched_item)
+    @restaurants2 = Restaurant.near(@searched_item, 50).order('distance')
+    @restaurants3 = Restaurant.search_type(@searched_item)
     @restaurants = @restaurants1 | @restaurants2 | @restaurants3
   end
 
   def search_filter
-    @search = params[:search]
-    @filter = params[:filter]
-    @restaurants = if params[:filter] == 'Restaurant'
-                     Restaurant.where('name LIKE ?', '%' + @search + '%')
-                   elsif params[:filter] == 'Location'
+    @search = search_params[:search]
+    @filter = search_params[:filter]
+    @restaurants = if @filter == 'Restaurant'
+                     Restaurant.search_name(@search)
+                   elsif @filter == 'Location'
                      Restaurant.near(@search, 50).order('distance')
                    else
-                     Restaurant.where('resturant_type LIKE ?', '%' + @search + '%')
+                     Restaurant.search_type(@search)
                    end
 
-    render :search_filter, locals: { search: params[:search], filter: params[:filter] }
+    render :search_filter, locals: { search: search_params[:search], filter: search_params[:filter] }
   end
 
   private
 
-  def params_create
-    params.require(:restaurant).permit(:name, :category, :resturant_type, :latitude, :longitude, pictures: [])
+  def resturant_params
+    params.require(:restaurant).permit(:name, :category, :resturant_type, :pictures)
   end
 
-  def resturant_params
-    params.require(:restaurant).permit(:name, :category, :resturant_type)
+  def get_restaurant
+    params.permit(:id)
+  end
+
+  def search_params
+    params.permit(:search, :filter)
   end
 end

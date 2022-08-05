@@ -11,32 +11,26 @@ class UsersController < ApplicationController
 
   def create
     if logged_in?
-      flash[:notice] = 'Cant create new user while logged in'
-      redirect_to login_path
+      redirect_to login_path, flash: {success: 'Cant create new user while logged in'}
     end
 
     @user = User.new(user_params)
 
     if @user.valid?
       @user.save
-      flash[:notice] = 'User Registered Successfully. Please Login to continue.'
-      redirect_to login_path
+      redirect_to login_path, flash: {success: 'User Registered Successfully. Please Login to continue.'}
     else
-      flash[:notice] = 'Email already exists'
-      redirect_to signup_path
+      redirect_to signup_path,flash: {success: 'Email already exists'}
     end
   end
 
   def show
     if !User.exists?(params[:id])
-      flash[:notice] = 'User not authorized'
-      redirect_to login_path
+      redirect_to login_path,flash: {success: 'Email already exists'}
     else
       @user = User.find(params[:id])
-
       if session[:user_id] != @user.id
-        flash[:notice] = 'Action not authorized'
-        redirect_to login_path
+        redirect_to login_path,flash: {success: 'User not authorized'}
       end
       @city = request.location.city
       @restaurants = Restaurant.all
@@ -45,13 +39,11 @@ class UsersController < ApplicationController
 
   def edit
     if !User.exists?(params[:id])
-      flash[:notice] = 'User not authorized'
-      redirect_to login_path
+      redirect_to login_path,flash: {success: 'User not authorized'}
     else
       @user = User.find(params[:id])
       if session[:user_id] != @user.id
-        flash[:notice] = 'Not Authorized'
-        redirect_to login_path
+        redirect_to login_path,flash: {success: 'User not authorized'}
       end
     end
   end
@@ -61,7 +53,7 @@ class UsersController < ApplicationController
       redirect_to login_path
 
     else
-      @user = User.find(params[:id])
+      @user = User.find(get_user[:id])
       if @user.update(user_params)
         redirect_to @user
       else
@@ -72,13 +64,11 @@ class UsersController < ApplicationController
 
   def appointments
     if !User.exists?(params[:id])
-      flash[:notice] = 'User not authorized'
-      redirect_to login_path
+      redirect_to login_path,flash: {success: 'User not authorized'}
     else
       @user = User.find(params[:id])
       if session[:user_id] != @user.id
-        flash[:notice] = 'Action not authorized'
-        redirect_to login_path
+        redirect_to login_path,flash: {success: 'User not authorized'}
       end
       @book = Book.where(user_id: current_user.id)
     end
@@ -89,5 +79,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :username, :password, :password_confirmation, :isadmin, :latitude,
                                  :longitude)
+  end
+
+  def get_user
+    params.permit(:id)
   end
 end

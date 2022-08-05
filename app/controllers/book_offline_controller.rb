@@ -6,10 +6,14 @@ class BookOfflineController < ApplicationController
   end
 
   def create
-    @book = Book.new(user_id: current_user.id, restaurant_id: params[:id], booked_at: params[:booked_at],
-                     booked_on: params[:booked_on], head: params[:heads])
+    @book = Book.new(book_offline_params)
     @book.save
-    flash[:notice] = 'Booking Confirmed'
-    redirect_to login_path
+    redirect_to login_path, flash: {success: 'Booking Confirmed'}
+  end
+
+  private 
+
+  def book_offline_params
+    params.permit(:id,:booked_at,:booked_on,:head)
   end
 end

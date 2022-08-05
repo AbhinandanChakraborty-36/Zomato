@@ -1,10 +1,4 @@
-<% if flash.any? %>
-  <% flash.each do |notice, msg|%>
-    <div class="alert alert-info">
-      <%= msg%>
-    </div>
-  <% end %>
-<% end %>
+<%= render 'layouts/flash'%>
 
 <div class="signUp">
   <h1 class="sign-up">Sign Up </h1>
