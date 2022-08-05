@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def show
     if !User.exists?(params[:id])
-      redirect_to login_path,flash: {success: 'Email already exists'}
+      redirect_to login_path,flash: {success: 'User not authorized'}
     else
       @user = User.find(params[:id])
       if session[:user_id] != @user.id
