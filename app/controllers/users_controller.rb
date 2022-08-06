@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :authorized, only: %i[show edit]
+  before_action :checkuser, only: %i[show edit appointments ]
+  before_action :correct_user, only: %i[show edit appointments ]
 
   def new
     if !logged_in?
@@ -13,9 +15,7 @@ class UsersController < ApplicationController
     if logged_in?
       redirect_to login_path, flash: {success: 'Cant create new user while logged in'}
     end
-
     @user = User.new(user_params)
-
     if @user.valid?
       @user.save
       redirect_to login_path, flash: {success: 'User Registered Successfully. Please Login to continue.'}
@@ -25,33 +25,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    if !User.exists?(params[:id])
-      redirect_to login_path,flash: {success: 'User not authorized'}
-    else
-      @user = User.find(params[:id])
-      if session[:user_id] != @user.id
-        redirect_to login_path,flash: {success: 'User not authorized'}
-      end
       @city = request.location.city
       @restaurants = Restaurant.all
-    end
   end
 
   def edit
-    if !User.exists?(params[:id])
-      redirect_to login_path,flash: {success: 'User not authorized'}
-    else
-      @user = User.find(params[:id])
-      if session[:user_id] != @user.id
-        redirect_to login_path,flash: {success: 'User not authorized'}
-      end
-    end
   end
 
   def update
     if !logged_in?
       redirect_to login_path
-
     else
       @user = User.find(get_user[:id])
       if @user.update(user_params)
@@ -63,15 +46,7 @@ class UsersController < ApplicationController
   end
 
   def appointments
-    if !User.exists?(params[:id])
-      redirect_to login_path,flash: {success: 'User not authorized'}
-    else
-      @user = User.find(params[:id])
-      if session[:user_id] != @user.id
-        redirect_to login_path,flash: {success: 'User not authorized'}
-      end
       @book = Book.where(user_id: current_user.id)
-    end
   end
 
   private
@@ -83,5 +58,18 @@ class UsersController < ApplicationController
 
   def get_user
     params.permit(:id)
+  end
+
+  def checkuser
+    if !User.exists?(params[:id])
+      redirect_to login_path,flash: {success: 'User not authorized'}
+    end  
+  end 
+
+  def correct_user
+    @user = User.find(params[:id])
+      if session[:user_id] != @user.id
+        redirect_to login_path,flash: {success: 'User not authorized'}
+      end
   end
 end
