@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   def index
-    @user = User.find(params[:user_id])
+    @user = User.includes(:reviews).find(params[:user_id])
     if session[:user_id] == @user.id
       @user = User.find(current_user.id)
     else

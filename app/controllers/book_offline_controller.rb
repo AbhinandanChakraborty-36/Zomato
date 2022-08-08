@@ -7,6 +7,8 @@ class BookOfflineController < ApplicationController
 
   def create
     @book = Book.new(book_offline_params)
+    @book.user_id= current_user.id
+    @book.restaurant_id= book_offline_params[:id]
     @book.save
     redirect_to login_path, flash: {success: 'Booking Confirmed'}
   end
