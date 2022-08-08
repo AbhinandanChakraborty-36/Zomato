@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def appointments
-      @book = Book.where(user_id: current_user.id)
+      @user= User.includes(:books).find(current_user.id)
   end
 
   private
